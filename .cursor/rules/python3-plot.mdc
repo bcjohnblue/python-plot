@@ -1,0 +1,107 @@
+---
+description: 支援 python3 的畫圖程式
+globs: **/*.py
+alwaysApply: false
+---
+
+## 🧩 規則內容
+
+### 📊 繪圖程式最佳實踐
+
+#### 1. 依賴管理
+
+- 使用 `matplotlib` 作為主要繪圖庫
+- 使用 `numpy` 進行數值計算
+- 使用 `pandas` 處理數據（如需要）
+- 使用 `seaborn` 美化圖表（可選）
+
+#### 2. 程式碼結構
+
+```python
+# 標準導入順序
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns  # 可選
+
+# 設置中文字體（如需要）
+plt.rcParams['font.sans-serif'] = ['Arial Unicode MS', 'SimHei']
+plt.rcParams['axes.unicode_minus'] = False
+
+# 設置圖表樣式
+plt.style.use('default')  # 或 'seaborn', 'ggplot' 等
+```
+
+#### 3. 圖表創建規範
+
+- 使用 `plt.figure()` 創建圖表
+- 設置適當的圖表大小：`plt.figure(figsize=(10, 6))`
+- 添加標題和標籤：`plt.title()`, `plt.xlabel()`, `plt.ylabel()`
+- 添加網格：`plt.grid(True, alpha=0.3)`
+- 添加圖例：`plt.legend()`
+
+#### 4. 錯誤處理
+
+```python
+try:
+    # 繪圖代碼
+    plt.plot(x, y)
+    plt.show()
+except Exception as e:
+    print(f"繪圖錯誤: {e}")
+finally:
+    plt.close()  # 清理記憶體
+```
+
+#### 5. 虛擬環境管理
+
+```bash
+# 啟動虛擬環境
+source venv/bin/activate  # macOS/Linux
+```
+
+#### 6. 用 python3 執行程式碼
+
+```bash
+python3 ./plot-example.py
+```
+
+#### 7. 程式碼範例結構
+
+```python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+import numpy as np
+import matplotlib.pyplot as plt
+
+def main():
+    """主函數"""
+    # 生成數據
+    x = np.linspace(0, 10, 100)
+    y = np.sin(x)
+
+    # 創建圖表
+    plt.figure(figsize=(10, 6))
+    plt.plot(x, y, label='sin(x)', linewidth=2)
+    plt.title('正弦函數圖表')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.grid(True, alpha=0.3)
+    plt.legend()
+
+    # 保存和顯示
+    plt.savefig('sine_plot.png', dpi=300, bbox_inches='tight')
+    plt.show()
+
+if __name__ == "__main__":
+    main()
+```
+
+### 🎯 專案特定規則
+
+根據專案結構，建議：
+
+- 將相關的繪圖程式放在同一目錄下
+- 使用描述性的檔案名稱
+- 在每個檔案開頭添加詳細的註釋
+- 創建 `requirements.txt` 管理依賴
+- 使用 `README.md` 說明專案用途和使用方法
